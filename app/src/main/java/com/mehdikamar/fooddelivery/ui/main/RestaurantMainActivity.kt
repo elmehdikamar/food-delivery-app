@@ -1,7 +1,6 @@
 package com.mehdikamar.fooddelivery.ui.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -17,34 +16,35 @@ import javax.inject.Inject
 
 class RestaurantMainActivity : DaggerAppCompatActivity() {
 
+    companion object {
+        const val RESTAURANT_DETAIL_TAG: String = "RestaurantDetailFragment"
+    }
+
     lateinit var binding: ActivityMainBinding
 
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
-    val RESTAURANT_DETAIL_TAG: String = "RestaurantDetailFragment"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("HE", "Hello")
         binding = ActivityMainBinding.inflate(layoutInflater)
         mainViewModel = ViewModelProvider(this, vmFactory)[MainViewModel::class.java]
         val view = binding.root
         setContentView(view)
         initViews()
-        mainViewModel.getRestaurants()
         initObservers()
+        mainViewModel.getRestaurants()
     }
 
-    fun initViews() {
+    private fun initViews() {
         binding.recyclerViewRestaurants.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewFilters.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    fun initObservers() {
+    private fun initObservers() {
         mainViewModel.getLoadingObserver().observe(this) { loading ->
             if (loading) {
                 binding.mainLayout.visibility = View.GONE
@@ -76,7 +76,7 @@ class RestaurantMainActivity : DaggerAppCompatActivity() {
                     ) { restaurant ->
                         RestaurantDetailFragment().show(
                             supportFragmentManager,
-                            RESTAURANT_DETAIL_TAG
+                            Companion.RESTAURANT_DETAIL_TAG
                         )
                         mainViewModel.selectRestaurant(restaurant)
                     }

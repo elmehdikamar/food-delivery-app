@@ -1,11 +1,9 @@
 package com.mehdikamar.fooddelivery.di
 
 import android.content.Context
-import androidx.viewbinding.ViewBinding
 import com.mehdikamar.fooddelivery.FoodDeliveryApplication
 import com.mehdikamar.fooddelivery.di.builders.ActivityModule
 import com.mehdikamar.fooddelivery.di.builders.ViewModelModule
-import com.mehdikamar.fooddelivery.ui.main.RestaurantMainActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
