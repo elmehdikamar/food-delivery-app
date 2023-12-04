@@ -76,7 +76,7 @@ class RestaurantMainActivity : DaggerAppCompatActivity() {
                     ) { restaurant ->
                         RestaurantDetailFragment().show(
                             supportFragmentManager,
-                            Companion.RESTAURANT_DETAIL_TAG
+                            RESTAURANT_DETAIL_TAG
                         )
                         mainViewModel.selectRestaurant(restaurant)
                     }
